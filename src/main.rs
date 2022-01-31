@@ -61,7 +61,9 @@ fn main() {
             .get(root_db, db_name)
             .expect("could not retrieve source db key in root");
 
-        let target_db = env.open_db(None).expect("could not open source db");
+        let target_db = env
+            .open_db(Some(db_name))
+            .expect("could not open source db");
         println!("found {}", db_name);
 
         // Now we can transfer over every key.
