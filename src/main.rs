@@ -64,7 +64,7 @@ fn main() {
         let target_db = env.open_db(None).expect("could not open source db");
         println!("found {}", db_name);
 
-        // Now we can transfor over every key.
+        // Now we can transfer over every key.
         let txn = env.begin_ro_txn().unwrap();
         let db_iter = txn.open_ro_cursor(target_db).unwrap().iter_start();
         for (key, value) in db_iter.progress_count(entry_count as u64) {
