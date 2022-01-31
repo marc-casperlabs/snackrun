@@ -8,4 +8,6 @@ edition = "2021"
 [dependencies]
 indicatif = "0.16.2"
 lmdb = "0.8.0"
+stuffer_shack = { path="../stuffer_shack-rs" }
 structopt = "0.3.26"
+generic-array = "0.14.5"
