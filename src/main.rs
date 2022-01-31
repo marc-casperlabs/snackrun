@@ -74,7 +74,7 @@ fn main() {
 
         // Now we can transfor over every key.
         let txn = env.begin_ro_txn().unwrap();
-        let db_iter = txn.open_ro_cursor(root_db).unwrap().iter_start();
+        let db_iter = txn.open_ro_cursor(target_db).unwrap().iter_start();
         for (key, value) in db_iter.progress_count(entry_count as u64) {
             // Count entries for stats.
             *key_lens.entry(key.len()).or_default() += 1;
