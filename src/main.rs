@@ -35,16 +35,16 @@ fn main() {
     let root_db = env.open_db(None).expect("could not open root db");
     for (key, _) in env
         .begin_ro_txn()
-        .unwrap()
+        .expect("could not create RO transaction on root")
         .open_ro_cursor(root_db)
-        .unwrap()
-        .iter_start()
+        .expect("could not create cursor on root")
+        .iter()
     {
         println!("db seen: {}", String::from_utf8_lossy(key));
     }
 
     // This is inaccurate, but all the `lmdb` crate exposes. Other crates have per-db stats.
-    let entry_count = env.stat().unwrap().entries();
+    let entry_count = env.stat().expect("stat failed").entries();
     println!("number of entries in all dbs: {:?}", entry_count);
 
     if let (Some(ref db_name), Some(ref output)) = (opts.db_name, opts.output) {
@@ -57,7 +57,7 @@ fn main() {
         let mut value_lens: HashMap<usize, u64> = HashMap::new();
 
         env.begin_ro_txn()
-            .unwrap()
+            .expect("could not create validation transaction")
             .get(root_db, db_name)
             .expect("could not retrieve source db key in root");
 
@@ -67,8 +67,13 @@ fn main() {
         println!("found {}", db_name);
 
         // Now we can transfer over every key.
-        let txn = env.begin_ro_txn().unwrap();
-        let db_iter = txn.open_ro_cursor(target_db).unwrap().iter_start();
+        let txn = env
+            .begin_ro_txn()
+            .expect("could not create new transaction");
+        let db_iter = txn
+            .open_ro_cursor(target_db)
+            .expect("could not create cursor over target db")
+            .iter();
         for (key, value) in db_iter.progress_count(entry_count as u64) {
             // Count entries for stats.
             *key_lens.entry(key.len()).or_default() += 1;
