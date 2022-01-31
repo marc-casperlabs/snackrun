@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 indicatif = "0.16.2"
 lmdb = "0.8.0"
-stuffer_shack = { path="../stuffer_shack-rs" }
+# stuffer_shack = { path="../stuffer_shack-rs" }
+stuffer_shack = { git="https://github.com/marc-casperlabs/stuffer_shack-rs/", rev="f622fc031359bc5d9b7b193453776e862586ace1" }
 structopt = "0.3.26"
 generic-array = "0.14.5"
