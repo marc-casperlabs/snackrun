@@ -1,8 +1,4 @@
-use std::{
-    collections::HashMap,
-    ops::Add,
-    path::{Path, PathBuf},
-};
+use std::{collections::HashMap, path::PathBuf};
 
 use generic_array::typenum;
 use indicatif::ProgressIterator;
@@ -18,10 +14,6 @@ struct Cli {
     /// Stuffer shack to output to.
     #[structopt(long, short)]
     output: Option<PathBuf>,
-
-    /// Key size to use
-    #[structopt(long, short, default_value = "32")]
-    key_size: u16,
 
     /// Database to copy.
     #[structopt(long, short)]
@@ -41,7 +33,7 @@ fn main() {
 
     // List all databases, just in case.
     let root_db = env.open_db(None).expect("could not open root db");
-    for (key, value) in env
+    for (key, _) in env
         .begin_ro_txn()
         .unwrap()
         .open_ro_cursor(root_db)
