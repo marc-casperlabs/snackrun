@@ -484,7 +484,7 @@ dependencies = [
 [[package]]
 name = "stuffer_shack"
 version = "0.1.0"
-source = "git+https://github.com/marc-casperlabs/stuffer_shack-rs/?rev=f622fc031359bc5d9b7b193453776e862586ace1#f622fc031359bc5d9b7b193453776e862586ace1"
+source = "git+https://github.com/marc-casperlabs/stuffer_shack-rs/?rev=7287d5eb8b87d28c6eb9bbda4a9d85c07622a677#7287d5eb8b87d28c6eb9bbda4a9d85c07622a677"
 dependencies = [
  "generic-array",
  "memmap",

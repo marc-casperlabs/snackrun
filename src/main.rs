@@ -83,7 +83,7 @@ fn main() {
             let mut new_key = [0xFFu8; 32];
             let l = key.len().min(32);
             new_key[..l].copy_from_slice(&key[..l]);
-            shack.write(new_key.into(), value);
+            shack.write_anonymous(new_key.into(), value);
         }
 
         println!("done");
